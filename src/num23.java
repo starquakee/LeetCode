@@ -1,0 +1,2 @@
+public class num23 {
+}
