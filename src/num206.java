@@ -1,13 +1,27 @@
-public class num206 {
-    public ListNode reverseList(ListNode head) {
-        if(head==null) return null;
-        ListNode cur = head;
-        ListNode temp = new ListNode(cur.val);
-        cur = cur.next;
-        while (cur!=null){
-            temp = new ListNode(cur.val, temp);
-            cur = cur.next;
+import java.util.ArrayList;
+import java.util.List;
+
+class num206 {
+    public boolean isPalindrome(ListNode head) {
+        List<Integer> vals = new ArrayList<Integer>();
+
+        // 将链表的值复制到数组中
+        ListNode currentNode = head;
+        while (currentNode != null) {
+            vals.add(currentNode.val);
+            currentNode = currentNode.next;
         }
-        return temp;
+
+        // 使用双指针判断是否回文
+        int front = 0;
+        int back = vals.size() - 1;
+        while (front < back) {
+            if (!vals.get(front).equals(vals.get(back))) {
+                return false;
+            }
+            front++;
+            back--;
+        }
+        return true;
     }
 }
