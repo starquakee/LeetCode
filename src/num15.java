@@ -31,8 +31,6 @@ public class num15 {
             int i3 = nums.length-1;
             for(int i2=i1+1;i2<nums.length;i2++){
                 if(i2>i1+1&&nums[i2]==nums[i2-1]) continue;
-
-
 //                    System.out.println(nums[i1]+" "+nums[i2]+" "+nums[i3]);
                 while (i2<i3&&nums[i1]+nums[i2]+nums[i3]>0){
                     i3--;
@@ -46,7 +44,6 @@ public class num15 {
                     ans.add(temp);
 //                    break;
                 }
-
             }
         }
         return ans;
