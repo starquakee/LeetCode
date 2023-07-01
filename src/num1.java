@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class num1 {
     public int[] twoSum(int[] nums, int target) {
@@ -14,12 +13,6 @@ public class num1 {
                 ans[1]=map.get(target-nums[i]);
             }
         }
-
         return ans;
     }
-
-    public static void main(String[] args) {
-        System.out.println("hello, world!");
-    }
-
 }
