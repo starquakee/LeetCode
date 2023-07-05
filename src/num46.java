@@ -6,7 +6,7 @@ public class num46 {
         List<List<Integer>> result = new ArrayList<>();
         List<Integer> tempList = new ArrayList<>();
         boolean[] used = new boolean[nums.length];
-        backtrack(nums, used, tempList, result);
+        backtrack_new(nums, used, tempList, result,0);
         return result;
     }
 
@@ -22,6 +22,21 @@ public class num46 {
                 backtrack(nums, used, tempList, result);
                 used[i] = false;
                 tempList.remove(tempList.size()-1);
+            }
+        }
+    }
+    private void backtrack_new(int[] nums, boolean[] used, List<Integer> tempList, List<List<Integer>> result ,int begin) {
+        if (tempList.size() == nums.length) {
+            result.add(new ArrayList<>(tempList));
+            return;
+        }
+        for (int i = begin; i < nums.length; i++) {
+            if (!used[i]) {
+                tempList.add(nums[i]);
+                used[i] = true;
+                backtrack_new(nums, used, tempList, result, begin);
+                used[i] = false;
+                tempList.remove(tempList.size() - 1);
             }
         }
     }
