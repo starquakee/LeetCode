@@ -18,4 +18,10 @@ public class num19 {
         }
         return ans;
     }
+
+    public static void main(String[] args) {
+        String a = "aaabbb";
+        String b = "aaabbb";
+        System.out.println(a.equals(new String("aaabbb")));
+    }
 }
