@@ -1,3 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 public class num918 {
     public int maxSubarraySumCircular(int[] nums) {
         if(nums.length==1)return nums[0];
@@ -22,4 +25,28 @@ public class num918 {
         }
         return max;
     }
+
+    public static void main(String[] args) {
+        Status status = Status.SUCCESS;
+        System.out.println(status.getCode());
+        Queue<Integer> queue = new ArrayDeque<>();
+
+    }
 }
+enum Status {
+    SUCCESS(200),
+    NOT_FOUND(404),
+    SERVER_ERROR(500);
+
+    private final int code;
+
+    Status(int code) {
+        this.code = code;
+    }
+
+    public int getCode() {
+        return code;
+    }
+}
+
+

@@ -4,6 +4,7 @@ import java.util.PriorityQueue;
 public class num239 {
     public int[] maxSlidingWindow(int[] nums, int k) {
         int[] ans = new int[nums.length-k+1];
+        PriorityQueue<int[]> priorityQueue1 = new PriorityQueue<>((a,b)->a[0]!=b[0]?b[0]-a[0]:b[1]-a[1]);
         PriorityQueue<int[]> priorityQueue = new PriorityQueue<>(new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
