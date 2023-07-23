@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class num42 {
     public static int trap(int[] height) {
@@ -55,7 +54,6 @@ public class num42 {
                 System.out.println(-Math.min(height[k],minHeight));
             }
         }
-        System.out.println(ans);
         return ans;
     }
 
