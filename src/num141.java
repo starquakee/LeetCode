@@ -6,10 +6,8 @@ public class num141 {
         Set<ListNode> set = new HashSet<>();
         ListNode cur = head;
         while (cur!=null){
-            if(set.contains(cur)){
+            if(!set.add(cur)){
                 return true;
-            }else {
-                set.add(cur);
             }
             cur = cur.next;
         }
