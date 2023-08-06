@@ -1,18 +1,17 @@
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class num142 {
     public ListNode detectCycle(ListNode head) {
-        Set<ListNode> set = new HashSet<>();
-        ListNode cur = head;
-        while (cur!=null){
-            if(set.contains(cur)){
-                return cur;
-            }else {
-                set.add(cur);
-            }
-            cur = cur.next;
+        if(head==null||head.next==null)return null;
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast!=slow){
+            if(fast==null||fast.next==null)return null;
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return null;
+        return fast;
     }
 }

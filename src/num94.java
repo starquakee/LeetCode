@@ -15,7 +15,7 @@ import java.util.List;
 //}
 public class num94 {
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList<Integer>();
+        List<Integer> res = new ArrayList<>();
         dfs(res,root);
         return res;
     }

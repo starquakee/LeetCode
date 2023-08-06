@@ -1,7 +1,4 @@
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 // We have imported the necessary tool classes.
 // If you need to import additional packages or classes, please import here.
@@ -19,6 +16,64 @@ class node{
     }
 }
 public class huawei1 {
+    public TreeNode invertTree(TreeNode root) {
+        if(root==null)return root;
+        TreeNode left_new = invertTree(root.right);
+        TreeNode right_new = invertTree(root.left);
+        root.left = left_new;
+        root.right = right_new;
+        return root;
+    }
+    public boolean isSymmetric(TreeNode root) {
+        return check(root.left,root.right);
+    }
+    public boolean check(TreeNode left,TreeNode right){
+        if(left==null&&right==null) return true;
+        if(left==null||right==null) return false;
+        if(left.val==right.val){
+            return check(left.left,right.right)&check(left.right,right.left);
+        }
+        return false;
+    }
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if(root==null)return ans;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            List<Integer> list = new ArrayList<>();
+            for(int i=0;i<size;i++){
+                TreeNode temp = queue.poll();
+                list.add(temp.val);
+                if(temp.left!=null){
+                    queue.offer(temp.left);
+                }
+                if(temp.right!=null){
+                    queue.offer(temp.right);
+                }
+            }
+            ans.add(new ArrayList<>(list));
+        }
+        return ans;
+    }
+    public int pathSum(TreeNode root, int targetSum) {
+        if(root==null)return 0;
+        int ans = 0;
+        if(root.val==targetSum)return 1;
+        ans += rootSum(root,targetSum);
+        ans += pathSum(root.left,targetSum);
+        ans += pathSum(root.right,targetSum);
+        return ans;
+    }
+    public int rootSum(TreeNode root, int targetSum){
+        if(root==null)return 0;
+        int ans = 0;
+        if(root.val==targetSum)return 1;
+        ans += rootSum(root.left,targetSum-root.val);
+        ans += rootSum(root.right,targetSum-root.val);
+        return ans;
+    }
     public static int dfs(node nod){
         int max=0;
         Stack<node> stack = new Stack<>();

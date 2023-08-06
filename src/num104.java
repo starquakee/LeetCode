@@ -5,6 +5,7 @@ public class num104 {
         if(root==null) return 0;
         return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
     }
+
     public static void main(String[] args) {
         TreeNode a1 =new TreeNode(1);
         TreeNode a2 =new TreeNode(2);
