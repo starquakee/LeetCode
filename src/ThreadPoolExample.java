@@ -1,11 +1,10 @@
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class ThreadPoolExample {
 
     public static void main(String[] args) {
         // 创建一个固定大小为 3 的线程池
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        ExecutorService executor = new ThreadPoolExecutor(3,4,1, TimeUnit.SECONDS,new LinkedBlockingDeque<>());
 
         // 提交任务给线程池执行
         for (int i = 1; i <= 10; i++) {
