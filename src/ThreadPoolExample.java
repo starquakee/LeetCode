@@ -20,6 +20,8 @@ public class ThreadPoolExample {
             };
             executor.execute(runnable);
         }
+        int cores = Runtime.getRuntime().availableProcessors();
+        System.out.println("Number of CPU cores: " + cores);
 
         // 关闭线程池
         executor.shutdown();
