@@ -3,6 +3,7 @@ import java.util.concurrent.*;
 public class ThreadPoolExample {
 
     public static void main(String[] args) {
+        Semaphore semaphore = new Semaphore(5);
         // 创建一个固定大小为 3 的线程池
         ExecutorService executor = new ThreadPoolExecutor(3,4,1, TimeUnit.SECONDS,new LinkedBlockingDeque<>());
 
