@@ -17,7 +17,7 @@ public class num1289 {
             }
         }
         if (m == 1) return min;
-        
+
         for (int i = 1; i < m; i++) {
             System.out.println(min + "  " + min_index);
             for (int j = 0; j < n; j++) {
