@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class num78 {
-    List<Integer> t = new ArrayList<Integer>();
-    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+    List<Integer> t = new ArrayList<>();
+    List<List<Integer>> ans = new ArrayList<>();
 
     public List<List<Integer>> subsets(int[] nums) {
         int n = nums.length;
