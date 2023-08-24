@@ -14,14 +14,12 @@ public class QuickSort {
     private static int partition(int[] array, int low, int high) {
         int i=low-1;
         int pivot = array[high];
-        for(int j=low;j<high;j++){
-            if(array[j]<pivot){
+        for(int j=low;j<=high;j++){
+            if(array[j]<=pivot){
                 i++;
                 swap(array,i,j);
             }
         }
-        i++;
-        swap(array,i,high);
         return i;
     }
 
