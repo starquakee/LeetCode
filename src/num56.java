@@ -5,6 +5,12 @@ public class num56 {
         Set<int[]> list = new HashSet<>();
         Set<Integer> set = new HashSet<>();
         Set<Integer> same = new HashSet<>();
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return 0;
+            }
+        });
         for(int i=0;i<intervals.length;i++){
             if(intervals[i][0]<intervals[i][1]){
                 for(int j=intervals[i][0];j<intervals[i][1];j++){
