@@ -29,7 +29,4 @@ public class num94 {
         res.add(root.val);
         dfs(res,root.right);
     }
-    public static void main(String[] args) {
-
-    }
 }
