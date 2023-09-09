@@ -1,44 +1,34 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class num207 {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        Map<Integer, HashSet<Object>> map = new HashMap<>();
+        Map<Integer, List<Integer>> map = new HashMap<>();
         for(int i=0;i<numCourses;i++){
-            map.put(i,new HashSet<>());
+            map.put(i,new ArrayList<>());
 
         }
+        int[] in = new int[numCourses];
         for(int i=0;i< prerequisites.length;i++){
-            map.get(prerequisites[i][0]).add(prerequisites[i][1]);
+            map.get(prerequisites[i][1]).add(prerequisites[i][0]);
+            in[prerequisites[i][0]]++;
         }
-        boolean b=true;
-        while (b){
-            b=false;
-            for(int i=0;i<numCourses;i++){
-                if(map.get(i).isEmpty()){
-                    boolean bb=false;
-                    for(int ii=0;ii<numCourses;ii++){
-
-                        if(map.get(ii).contains(i)){
-                            bb=true;
-                        }
-                        map.get(ii).remove(i);
-                        if(map.get(ii).isEmpty()&&!b)b= bb;
-                    }
+        int cnt = 0;
+        Queue<Integer> queue = new ArrayDeque<>();
+        for(int i=0;i<numCourses;i++){
+            if(in[i]==0){
+                queue.offer(i);
+            }
+        }
+        while (!queue.isEmpty()){
+            int num = queue.poll();
+            cnt++;
+            for(int child:map.get(num)){
+                in[child]--;
+                if(in[child]==0){
+                    queue.offer(child);
                 }
             }
         }
-
-        for(int i = 0;i<numCourses;i++){
-            if(!map.get(i).isEmpty()) return false;
-        }
-        return true;
-    }
-
-    public static void main(String[] args) {
-        Set<Integer> set = new HashSet<>();
-        System.out.println(set.isEmpty());
+        return cnt==numCourses;
     }
 }
