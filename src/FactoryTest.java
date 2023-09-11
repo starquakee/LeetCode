@@ -3,7 +3,7 @@ import java.util.Comparator;
 
 public class FactoryTest {
     public static void main(String[] args) {
-        System.out.println(Math.random());
+        System.out.println(42&41);
         System.out.println();
         System.out.println(10/3.0);
         // 使用 CircleFactory 创建 Circle 对象
