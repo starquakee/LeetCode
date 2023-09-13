@@ -1,8 +1,30 @@
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class FactoryTest {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("请输入几组数字：");
+        int numGroups = scanner.nextInt();
+        scanner.nextLine(); // 读取换行符
+
+        for (int i = 0; i < numGroups; i++) {
+            System.out.print("请输入数字：");
+            int number = scanner.nextInt();
+            scanner.nextLine(); // 读取换行符
+
+            System.out.print("请输入带空格的字符串：");
+            String str = scanner.nextLine();
+
+            // 在这里可以对读取到的数字和字符串进行处理
+            System.out.println("数字：" + number);
+            System.out.println("字符串：" + str);
+        }
+
+        // 关闭Scanner
+        scanner.close();
         System.out.println(42&41);
         System.out.println();
         System.out.println(10/3.0);
