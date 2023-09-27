@@ -1,3 +1,4 @@
+import java.util.*;
 public class num2591 {
     public int distMoney(int money, int children) {
         if(money<children)return -1;
