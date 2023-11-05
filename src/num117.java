@@ -1,3 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 //import java.util.*;
 //
 //class Node_dep {
@@ -43,3 +46,25 @@
 //
 //    }
 //}
+public class num117 {
+    public Node connect(Node root) {
+        if(root==null)return null;
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            for(int i=0;i<size-1;i++){
+                Node temp = queue.poll();
+                if(temp.left!=null) queue.offer(temp.left);
+                if(temp.right!=null) queue.offer(temp.right);
+                Node next = queue.peek();
+                temp.next = next;
+            }
+            Node temp = queue.poll();
+            if(temp.left!=null) queue.offer(temp.left);
+            if(temp.right!=null) queue.offer(temp.right);
+            temp.next = null;
+        }
+        return root;
+    }
+}
