@@ -1,9 +1,11 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 class Node {
     int val;
     Node next;
+    public List<Node> children;
     Node random;
     public Node left;
     public Node right;
