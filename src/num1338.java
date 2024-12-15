@@ -4,7 +4,7 @@ public class num1338 {
     public int minSetSize(int[] arr) {
         if(arr.length==1)return 1;
         Arrays.sort(arr);
-       List<Integer> list = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         int count = 1;
         for(int i=1;i<arr.length;i++){
             if(arr[i]==arr[i-1]){
