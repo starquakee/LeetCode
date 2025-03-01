@@ -3,8 +3,8 @@ import java.util.List;
 
 public class num131 {
     int[][] f;
-    List<List<String>> ret = new ArrayList<List<String>>();
-    List<String> ans = new ArrayList<String>();
+    List<List<String>> ret = new ArrayList<>();
+    List<String> ans = new ArrayList<>();
     public List<List<String>> partition(String s) {
         f = new int[s.length()][s.length()];
         dfs(s,0);
