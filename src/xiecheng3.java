@@ -6,7 +6,7 @@ public class xiecheng3 {
         Scanner input = new Scanner(System.in);
         String s = input.next();
         char[] chars = s.toCharArray();
-        Boolean b=false;
+        boolean b=false;
         for(int i=0;i<chars.length;i++){
             if(i>=1){
                 if(chars[i-1]==chars[i]&&chars[i-1]!='?'){
@@ -103,7 +103,6 @@ public class xiecheng3 {
         }
         StringBuilder ans= new StringBuilder();
         for(char c:chars){
-//            System.out.println(c);
             ans.append(c);
         }
         if(b){
