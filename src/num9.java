@@ -11,12 +11,7 @@ public class num9 {
             }
             x = x%len/10;
             len/=100;
-            System.out.println(x);
         }
         return true;
-    }
-    public static void main(String[] args) {
-        System.out.println( isPalindrome(1000021));
-
     }
 }
