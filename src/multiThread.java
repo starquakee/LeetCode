@@ -6,7 +6,7 @@ public class multiThread {
     private static final Lock lock = new ReentrantLock(); // 锁对象
     private static final Condition conditionA = lock.newCondition(); // 控制打印"A"的条件
     private static final Condition conditionB = lock.newCondition(); // 控制打印"B"的条件
-    private static boolean isPrintingA = true; // 控制打印"A"和"B"的标志
+    private static volatile boolean isPrintingA = true; // 控制打印"A"和"B"的标志
     /**lock.lock();
     try {
         while(不满足条件){
@@ -38,7 +38,6 @@ public class multiThread {
         });
 
         Thread threadB = new Thread(() -> {
-
             for (int i = 0; i < 10; i++) {
                 lock.lock();
                 try {
