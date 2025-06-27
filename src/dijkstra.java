@@ -33,7 +33,6 @@ public class dijkstra {
                 minIndex = v;
             }
         }
-
         return minIndex;
     }
 

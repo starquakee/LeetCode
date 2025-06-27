@@ -5,7 +5,6 @@ public class num47 {
         List<List<Integer>> ans = new ArrayList<>();
         List<Integer> temp = new ArrayList<>();
         boolean[] visit = new boolean[nums.length];
-        int index=0;
         Arrays.sort(nums);
         backtrack(0,nums,temp,ans,visit);
         return ans;
@@ -15,7 +14,7 @@ public class num47 {
             ans.add(new ArrayList<>(temp));
             return;
         }
-        for(int i=0;i<nums.length;i++){
+        for(int i=0;i<nums.length;i++){ //对于当前位置的待选择数字
             if(visit[i]||(i>0&&nums[i]==nums[i-1]&&!visit[i-1])){
                 continue;
             }
