@@ -62,20 +62,37 @@ public class num56 {
 //    }
 
 
+//    public int[][] merge(int[][] intervals) {
+//        if (intervals.length == 0) {
+//            return new int[0][2];
+//        }
+//        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+//        List<int[]> merged = new ArrayList<>();
+//        for (int i = 0; i < intervals.length; ++i) {
+//            int L = intervals[i][0], R = intervals[i][1];
+//            if (merged.size() == 0 || merged.get(merged.size() - 1)[1] < L) {
+//                merged.add(new int[]{L, R});
+//            } else {
+//                merged.get(merged.size() - 1)[1] = Math.max(merged.get(merged.size() - 1)[1], R);
+//            }
+//        }
+//        return merged.toArray(new int[merged.size()][]);
+//    }
     public int[][] merge(int[][] intervals) {
-        if (intervals.length == 0) {
-            return new int[0][2];
-        }
-        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
-        List<int[]> merged = new ArrayList<>();
-        for (int i = 0; i < intervals.length; ++i) {
-            int L = intervals[i][0], R = intervals[i][1];
-            if (merged.size() == 0 || merged.get(merged.size() - 1)[1] < L) {
-                merged.add(new int[]{L, R});
-            } else {
-                merged.get(merged.size() - 1)[1] = Math.max(merged.get(merged.size() - 1)[1], R);
+        Arrays.sort(intervals,Comparator.comparing(a->a[0]));
+        List<int[]> ans=new ArrayList<>();
+        int l=0;
+        int r=-1;
+        for(int[] interval:intervals){
+            if(interval[0]>r){
+                if(r>=0) ans.add(new int[]{l,r});
+                l=interval[0];
+                r=interval[1];
+            }else{
+                r=Math.max(r,interval[1]);
             }
         }
-        return merged.toArray(new int[merged.size()][]);
+        ans.add(new int[]{l,r});
+        return ans.toArray(new int[ans.size()][]);
     }
 }
