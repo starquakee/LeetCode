@@ -14,7 +14,7 @@ public class ThreadPoolExample {
         }
         executor.shutdown(); // 关闭线程池（不再接收新任务）
 
-
+        //同步，按顺序执行
         ExecutorService executor1 = Executors.newFixedThreadPool(3);
         Future<?> f1 = executor1.submit(() -> System.out.println("任务1"));
         Future<?> f2 = executor1.submit(() -> System.out.println("任务2"));
@@ -43,6 +43,13 @@ public class ThreadPoolExample {
 
         // 提交并等待所有任务执行完毕
         List<Future<String>> results = executor2.invokeAll(tasks);
+        results.forEach(future -> {
+            try {
+                System.out.println(future.get());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
         executor2.shutdown();
 
 
