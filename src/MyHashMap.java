@@ -2,39 +2,39 @@ import java.util.LinkedList;
 
 public class MyHashMap<K,V> {
     private int size = 16;
-    private LinkedList<Entryy<K,V>>[] linkedLists;
+    private LinkedList<Entry<K,V>>[] linkedLists;
     public MyHashMap(int size){
         this.size = size;
-        linkedLists = new LinkedList[size];
+        this.linkedLists = new LinkedList[size];
         for(int i=0;i<size;i++){
             linkedLists[i] = new LinkedList<>();
         }
     }
     public void put(K key,V value){
         int index = key.hashCode()%size;
-        LinkedList<Entryy<K,V>> linkedList = linkedLists[index];
-        for(Entryy<K,V> entryy : linkedList){
-            if(entryy.key.equals(key)){
-                entryy.value = value;
+        LinkedList<Entry<K,V>> linkedList = linkedLists[index];
+        for(Entry<K,V> entry : linkedList){
+            if(entry.key.equals(key)){
+                entry.value = value;
                 return;
             }
         }
-        linkedList.add(new Entryy<>(key, value));
+        linkedList.add(new Entry<>(key, value));
     }
     public V get(K key) {
         int index = key.hashCode()%size;
-        LinkedList<Entryy<K,V>> bucket = linkedLists[index];
-        for(Entryy<K,V> entry:bucket){
+        LinkedList<Entry<K,V>> bucket = linkedLists[index];
+        for(Entry<K,V> entry:bucket){
             if(entry.key.equals(key)){
                 return entry.value;
             }
         }
         return null;
     }
-    public static class Entryy<K,V>{
+    public static class Entry<K,V>{
         public K key;
         public V value;
-        public Entryy(K key,V value){
+        public Entry(K key, V value){
             this.key = key;
             this.value = value;
         }
