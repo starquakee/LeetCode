@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LFUCache {
-    class Node {
+    static class Node {
         int key, val, freq;
         Node prev, next;
 
@@ -17,7 +17,7 @@ public class LFUCache {
         }
     }
 
-    class DoublyLinkedList {
+    static class DoublyLinkedList {
         Node dummyHead, dummyTail;
         int size;
 
