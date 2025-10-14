@@ -2,6 +2,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class num3349 {
+    /*
+    brute force
+     */
+
 //    public boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
 //        int n = nums.size();
 //        if(k==1)return true;
@@ -18,6 +22,9 @@ public class num3349 {
 //        }
 //        return false;
 //    }
+    /*
+    select middle point j, and check if there are k increasing elements before and after j
+     */
     public boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
         int n = nums.size();
         if(k==1)return true;
