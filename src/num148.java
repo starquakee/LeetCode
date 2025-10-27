@@ -12,13 +12,7 @@ public class num148 {
             list.add(cur);
             cur = cur.next;
         }
-        Comparator<ListNode> comparator = new Comparator<ListNode>() {
-            @Override
-            public int compare(ListNode o1, ListNode o2) {
-                return o1.val- o2.val;
-            }
-        };
-        list.sort(comparator);
+        Collections.sort(list,(a,b)->{return a.val - b.val;});
         for (int i = 0; i < list.size()-1; i++) {
             list.get(i).next=list.get(i+1);
         }
