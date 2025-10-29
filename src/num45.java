@@ -33,20 +33,32 @@ public class num45 {
 //        return ans[n-1];
 //    }
     // ans is monotonically increasing
+//    public int jump(int[] nums) {
+//        int n = nums.length;
+//        int[] ans = new int[n];
+//        int updating = 0;
+//        for(int i=0;i<n;i++){
+//            int j=updating+1-i;
+//            for(;j<=nums[i]&&i+j<n;j++){
+//                ans[i+j]=ans[i]+1;
+//            }
+//            updating=i+j-1;
+//            System.out.println(updating);
+//            if (updating==n-1)break;
+//        }
+//        System.out.println(Arrays.toString(ans));
+//        return ans[n-1];
+//    }
     public int jump(int[] nums) {
-        int n = nums.length;
-        int[] ans = new int[n];
-        int updating = 0;
+        int n=nums.length;
+        int[] dp=new int[n];
+        Arrays.fill(dp,Integer.MAX_VALUE);
+        dp[0]=0;
         for(int i=0;i<n;i++){
-            int j=updating+1-i;
-            for(;j<=nums[i]&&i+j<n;j++){
-                ans[i+j]=ans[i]+1;
+            for(int j=1;j<=nums[i]&&i+j<n;j++){
+                dp[i+j]=Math.min(dp[i+j],dp[i]+1);
             }
-            updating=i+j-1;
-            System.out.println(updating);
-            if (updating==n-1)break;
         }
-        System.out.println(Arrays.toString(ans));
-        return ans[n-1];
+        return dp[n-1];
     }
 }
