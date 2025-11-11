@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class num474 {
     public int findMaxForm(String[] strs, int m, int n) {
         int[] a=new int[strs.length];
