@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class nums1018 {
+public class num1018_kimi2 {
     public List<Boolean> prefixesDivBy5(int[] nums) {
         List<Boolean> ans = new ArrayList<>();
         int temp=0;
