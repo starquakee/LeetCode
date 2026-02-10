@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class num3719 {
+public class num3721 {
     public int longestBalanced(int[] nums) {
         int ans=0;
         int n=nums.length;
