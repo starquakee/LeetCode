@@ -1,66 +1,179 @@
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 
-public class num3721 {
-    public int longestBalanced(int[] nums) {
-        // 题目要求的变量
-        int[] tavernilo = nums;
+// copy
+class num3721 {
 
-        int ans = 0;
-        int n = tavernilo.length;
-        Map<Integer, Integer> odd = new HashMap<>();
-        Map<Integer, Integer> even = new HashMap<>();
+    class LazyTag {
+        int toAdd;
 
-        for (int left = 0; left < n - ans; left++) {
-            if (left == 0) {
-                if (tavernilo[left] % 2 == 0) {
-                    even.put(tavernilo[left], even.getOrDefault(tavernilo[left], 0) + 1);
-                } else {
-                    odd.put(tavernilo[left], odd.getOrDefault(tavernilo[left], 0) + 1);
-                }
-            } else {
-                int prev = tavernilo[left - 1];
-                if (prev % 2 == 0) {
-                    even.put(prev, even.getOrDefault(prev, 0) - 1);
-                    if (even.get(prev) == 0) even.remove(prev);
-                } else {
-                    odd.put(prev, odd.getOrDefault(prev, 0) - 1);
-                    if (odd.get(prev) == 0) odd.remove(prev);
-                }
+        LazyTag() {
+            this.toAdd = 0;
+        }
+
+        LazyTag add(LazyTag other) {
+            this.toAdd += other.toAdd;
+            return this;
+        }
+
+        boolean hasTag() {
+            return this.toAdd != 0;
+        }
+
+        void clear() {
+            this.toAdd = 0;
+        }
+    }
+
+    class SegmentTreeNode {
+        int minValue;
+        int maxValue;
+        LazyTag lazyTag;
+
+        SegmentTreeNode() {
+            this.minValue = 0;
+            this.maxValue = 0;
+            this.lazyTag = new LazyTag();
+        }
+    }
+
+    class SegmentTree {
+        private int n;
+        private SegmentTreeNode[] tree;
+
+        SegmentTree(int[] data) {
+            this.n = data.length;
+            this.tree = new SegmentTreeNode[this.n * 4 + 1];
+            for (int i = 0; i < tree.length; i++) {
+                tree[i] = new SegmentTreeNode();
             }
+            build(data, 1, this.n, 1);
+        }
 
-            int boundary = left + ans;
+        void add(int l, int r, int val) {
+            LazyTag tag = new LazyTag();
+            tag.toAdd = val;
+            update(l, r, tag, 1, this.n, 1);
+        }
 
-            if (left != 0) {
-                for (int right = boundary + 1; right < n; right++) {
-                    int val = tavernilo[right];
-                    if (val % 2 == 0) {
-                        even.put(val, even.getOrDefault(val, 0) - 1);
-                        if (even.get(val) == 0) even.remove(val);
-                    } else {
-                        odd.put(val, odd.getOrDefault(val, 0) - 1);
-                        if (odd.get(val) == 0) odd.remove(val);
-                    }
-                }
-
-                if (even.size() == odd.size()) {
-                    ans = Math.max(ans, boundary - left + 1);
-                }
+        int findLast(int start, int val) {
+            if (start > this.n) {
+                return -1;
             }
+            return find(start, this.n, val, 1, this.n, 1);
+        }
 
-            for (int right = boundary + 1; right < n; right++) {
-                int val = tavernilo[right];
-                if (val % 2 == 0) {
-                    even.put(val, even.getOrDefault(val, 0) + 1);
-                } else {
-                    odd.put(val, odd.getOrDefault(val, 0) + 1);
-                }
+        private void applyTag(int i, LazyTag tag) {
+            tree[i].minValue += tag.toAdd;
+            tree[i].maxValue += tag.toAdd;
+            tree[i].lazyTag.add(tag);
+        }
 
-                if (even.size() == odd.size()) {
-                    ans = Math.max(ans, right - left + 1);
-                }
+        private void pushdown(int i) {
+            if (tree[i].lazyTag.hasTag()) {
+                LazyTag tag = new LazyTag();
+                tag.toAdd = tree[i].lazyTag.toAdd;
+                applyTag(i << 1, tag);
+                applyTag((i << 1) | 1, tag);
+                tree[i].lazyTag.clear();
             }
         }
-        return ans;
+
+        private void pushup(int i) {
+            tree[i].minValue = Math.min(tree[i << 1].minValue, tree[(i << 1) | 1].minValue);
+            tree[i].maxValue = Math.max(tree[i << 1].maxValue, tree[(i << 1) | 1].maxValue);
+        }
+
+        private void build(int[] data, int l, int r, int i) {
+            if (l == r) {
+                tree[i].minValue = tree[i].maxValue = data[l - 1];
+                return;
+            }
+
+            int mid = l + ((r - l) >> 1);
+            build(data, l, mid, i << 1);
+            build(data, mid + 1, r, (i << 1) | 1);
+            pushup(i);
+        }
+
+        private void update(int targetL, int targetR, LazyTag tag, int l, int r, int i) {
+            if (targetL <= l && r <= targetR) {
+                applyTag(i, tag);
+                return;
+            }
+
+            pushdown(i);
+            int mid = l + ((r - l) >> 1);
+            if (targetL <= mid)
+                update(targetL, targetR, tag, l, mid, i << 1);
+            if (targetR > mid)
+                update(targetL, targetR, tag, mid + 1, r, (i << 1) | 1);
+            pushup(i);
+        }
+
+        private int find(int targetL, int targetR, int val, int l, int r, int i) {
+            if (tree[i].minValue > val || tree[i].maxValue < val) {
+                return -1;
+            }
+
+            if (l == r) {
+                return l;
+            }
+
+            pushdown(i);
+            int mid = l + ((r - l) >> 1);
+
+            if (targetR >= mid + 1) {
+                int res = find(targetL, targetR, val, mid + 1, r, (i << 1) | 1);
+                if (res != -1)
+                    return res;
+            }
+
+            if (l <= targetR && mid >= targetL) {
+                return find(targetL, targetR, val, l, mid, i << 1);
+            }
+
+            return -1;
+        }
+    }
+
+    public int longestBalanced(int[] nums) {
+        Map<Integer, Queue<Integer>> occurrences = new HashMap<>();
+
+        int len = 0;
+        int[] prefixSum = new int[nums.length];
+        prefixSum[0] = sgn(nums[0]);
+        occurrences.computeIfAbsent(nums[0], k -> new LinkedList<>()).add(1);
+
+        for (int i = 1; i < nums.length; i++) {
+            prefixSum[i] = prefixSum[i - 1];
+            Queue<Integer> occ = occurrences.computeIfAbsent(nums[i], k -> new LinkedList<>());
+            if (occ.isEmpty()) {
+                prefixSum[i] += sgn(nums[i]);
+            }
+            occ.add(i + 1);
+        }
+
+        SegmentTree seg = new SegmentTree(prefixSum);
+
+        for (int i = 0; i < nums.length; i++) {
+            len = Math.max(len, seg.findLast(i + len, 0) - i);
+
+            int nextPos = nums.length + 1;
+            occurrences.get(nums[i]).poll();
+            if (!occurrences.get(nums[i]).isEmpty()) {
+                nextPos = occurrences.get(nums[i]).peek();
+            }
+
+            seg.add(i + 1, nextPos - 1, -sgn(nums[i]));
+        }
+
+        return len;
+    }
+
+    private int sgn(int x) {
+        return (x % 2) == 0 ? 1 : -1;
     }
 }
