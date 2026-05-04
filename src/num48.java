@@ -3,9 +3,7 @@ public class num48 {
         int n = matrix.length;
         int[][] copy = new int[n][n];
         for(int i=0;i<n;i++){
-            for (int j = 0; j < n; j++) {
-                copy[i][j] = matrix[i][j];
-            }
+            System.arraycopy(matrix[i], 0, copy[i], 0, n);
         }
         for(int i=n-1;i>=0;i--){
             for (int j = 0; j < n; j++) {
