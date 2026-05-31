@@ -5,6 +5,9 @@ public class num2126 {
         Arrays.sort(asteroids);
         long sum = mass;
         for (int i = 0; i < asteroids.length; i++) {
+            if(sum >= asteroids[asteroids.length-1]) {
+                return true;
+            }
             if (sum < asteroids[i]) {
                 return false;
             }
