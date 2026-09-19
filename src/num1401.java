@@ -7,6 +7,7 @@ public class num1401 {
         if (yCenter < y1 || yCenter > y2) {
             dist += Math.min(Math.pow(y1 - yCenter, 2), Math.pow(y2 - yCenter, 2));
         }
+
         return dist <= radius * radius;
     }
 }
