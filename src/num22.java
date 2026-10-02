@@ -3,52 +3,25 @@ import java.util.List;
 
 public class num22 {
     public List<String> generateParenthesis(int n) {
-        List<String> strings = generateAllPossibleStrings(2*n);
-        List<String> ans = new ArrayList<>();
-        strings.forEach(e->{
-            if(valid(e)){
-                ans.add(e);
-            }
-        });
+        List<String> ans = new ArrayList<String>();
+        backtrack(ans, new StringBuilder(), 0, 0, n);
         return ans;
     }
 
-    public static List<String> generateAllPossibleStrings(int n) {
-        List<String> result = new ArrayList<>();
-        generateAllPossibleStringsHelper(n, "", result);
-        return result;
-    }
-
-    private static void generateAllPossibleStringsHelper(int n, String currentString, List<String> result) {
-        if (currentString.length() == n) {
-            result.add(currentString);
+    public void backtrack(List<String> ans, StringBuilder cur, int open, int close, int max) {
+        if (cur.length() == max * 2) {
+            ans.add(cur.toString());
             return;
         }
-//二叉树结构
-        generateAllPossibleStringsHelper(n, currentString + "(", result);
-        generateAllPossibleStringsHelper(n, currentString + ")", result);
-    }
-    public boolean valid(String current) {
-        int balance = 0;
-        for (char c: current.toCharArray()) {
-            if (c == '(') {
-                ++balance;
-            } else {
-                --balance;
-            }
-            if (balance < 0) {
-                return false;
-            }
+        if (open < max) {
+            cur.append('(');
+            backtrack(ans, cur, open + 1, close, max);
+            cur.deleteCharAt(cur.length() - 1);
         }
-        return balance == 0;
-    }
-
-
-    public static void main(String[] args) {
-        int n = 6;
-        List<String> strings = generateAllPossibleStrings(n);
-        for (String s : strings) {
-            System.out.println(s);
+        if (close < open) {
+            cur.append(')');
+            backtrack(ans, cur, open, close + 1, max);
+            cur.deleteCharAt(cur.length() - 1);
         }
     }
 }
