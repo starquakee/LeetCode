@@ -28,6 +28,7 @@ public class num1267 {
                 }
             }
         }
+
         return ans;
     }
 }
